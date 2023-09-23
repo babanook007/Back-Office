@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import cors from "cors"; // Import ไลบรารี cors
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -8,6 +9,7 @@ const mongoURL =
   "mongodb+srv://StephenP:Stephen11@cluster0.qpaeqzw.mongodb.net/IotData";
 
 app.use(express.json());
+app.use("/login", cors({ origin: "http://localhost:5173" }));
 
 mongoose
   .connect(mongoURL)
@@ -17,6 +19,11 @@ mongoose
   .catch((error) => {
     console.log("เกิดข้อผิดพลาด", error);
   });
+
+  app.listen(port, () => {
+    console.log(`แอพพลิเคชันกำลังรอที่พอร์ต ${port}`);
+  });
+  
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
@@ -67,6 +74,39 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`แอพพลิเคชันกำลังรอที่พอร์ต ${port}`);
+app.post("/login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    // ค้นหาผู้ใช้ในฐานข้อมูลตามชื่อผู้ใช้
+    const user = await UserModel.findOne({ username });
+
+    if (!user) {
+      return res.status(400).json({ message: "Username not found" });
+    }
+
+    // เปรียบเทียบรหัสผ่านที่ผู้ใช้ป้อนกับรหัสผ่านที่ถูกเข้ารหัสในฐานข้อมูล
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(400).json({ message: "Invalid password" });
+    }
+
+    return res.status(200).json({ message: "Login successful" });
+  } catch (error) {
+    console.error("Error logging in:", error);
+    return res.status(500).json({ message: "Error logging in" });
+  }
 });
+
+const equipmentSchema = new mongoose.Schema({
+  username: { type: String, required: true },
+  email: { type: String, required: true },
+  password: { type: String, required: true },
+});
+
+const EquipmentModel = mongoose.model("equipment", equipmentSchema);
+
+app.post("/insert" , async(req,res) => {
+  
+})

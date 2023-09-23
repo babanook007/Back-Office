@@ -1,12 +1,10 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Noto Sans Thai', sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -14,56 +12,89 @@
   -webkit-text-size-adjust: 100%;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+:root {
+  --body-color: #E4E0F7;
+  --sidebar-color: #072a58;
+  --primary-color: #144fa2;
+  --primary-color-light: #f6f5ff;
+  --second-color: #475a90;
+  --toggle-color: #DDD;
+  --text-color-light: #f8fafa;
+
+  --tran-0: all 0s ease;
+  --tran-02: all 0.2s ease;
+  --tran-03: all 0.3s ease;
+  --tran-04: all 0.4s ease;
+  --tran-05: all 0.5s ease;
 }
 
 body {
-  margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  flex-direction: column;
+  position: relative;
+  height: 100vh;
+  background: #f4f5f5;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.barchart-container {
+  width: 100%;
+  display: flex;
+  margin-top: 25px;
+  justify-content: center;
+  align-items: center;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.red-text {
+  color: red;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.innerToggle {
+  position: absolute;
+  background: white;
+  height: 15px;
+  width: 15px;
+  border-radius: 50px;
+  transition: var(--tran-02);
+}
+
+.innerToggle.Tog{
+  height: 15px;
+  width: 15px;
+  border-radius: 50px;
+  transform: translateX(21px);
+}
+
+@keyframes fade-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
   }
-  a:hover {
-    color: #747bff;
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+@keyframes fade-left {
+  0% {
+    opacity: 0;
+    transform: translatex(30px) scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translatex(0px) scale(1);
+  }
+}
+
+@keyframes count-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
