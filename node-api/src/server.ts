@@ -9,7 +9,7 @@ const mongoURL =
   "mongodb+srv://StephenP:Stephen11@cluster0.qpaeqzw.mongodb.net/IotData";
 
 app.use(express.json());
-app.use("/login", cors({ origin: "http://localhost:5173" }));
+app.use("/login", cors());
 
 mongoose
   .connect(mongoURL)
