@@ -21,7 +21,7 @@ mongoose
   });
 
   app.listen(port, () => {
-    console.log(`แอพพลิเคชันกำลังรอที่พอร์ต ${port}`);
+    console.log(`Listenning in port ${port}`);
   });
   
 
@@ -29,6 +29,7 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  token: {type: String},
 });
 
 const UserModel = mongoose.model("userdata", userSchema);

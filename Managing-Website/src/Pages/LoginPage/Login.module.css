@@ -1,5 +1,6 @@
-
+@import '../../index.css';
 .container {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,6 +21,7 @@
     border-radius: 35px;
     filter: drop-shadow(0 0 2px black);
     padding: 50px;
+    animation: fade-down 0.2s;
 }
 
 .logo {
@@ -53,6 +55,11 @@
 
 .buttomContainer {
     width: 100%;
+}
+
+.buttomContainer p {
+    margin-top: 5px;
+    cursor: pointer;
 }
 
 .rememberContainer{
@@ -100,5 +107,35 @@
     width: 100%;
     font-size: 20px;
     font-weight: 300;
+    cursor: pointer;
+}
+
+.registerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 999;
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    background: white;
+    filter: drop-shadow(0 0 2px black);
+    padding: 25px;
+    border-radius: 15px;
+    animation: fade-down 0.2s;
+}
+
+.closeButton {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: -15px;
+    margin-bottom: -25px;
+}
+
+.closeButton p {
+    z-index: 5;
     cursor: pointer;
 }
