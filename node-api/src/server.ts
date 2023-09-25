@@ -107,13 +107,25 @@ app.post("/login", async (req, res) => {
 
 
 const equipmentSchema = new mongoose.Schema({
-  username: { type: String, required: true },
-  email: { type: String, required: true },
-  password: { type: String, required: true },
+  eq_name: { type: String, required: true },
+  eq_direction: { type: String, required: true },
+  eq_status: { type: String, required: true },
 });
 
 const EquipmentModel = mongoose.model("equipment", equipmentSchema);
 
-app.post("/insert" , async(req,res) => {
-  
+app.post("/insertequipment" , async(req,res) => {
+  try {
+    const { eq_name, eq_direction, eq_status } = req.body;
+    const newEquipment = new EquipmentModel ({
+      eq_name,
+      eq_direction,
+      eq_status,
+    });
+
+    await newEquipment.save();
+    return res.status(201).json({ message : "Insert Equipment Successfully" , newEquipment})
+  } catch(error) {
+    return res.status(500).json({ message: "Error Insert Equipments" });
+  }
 })
