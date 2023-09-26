@@ -1,29 +1,23 @@
-import { useEffect } from 'react'
-import { useSelector } from "react-redux";
-import { useAppDispatch } from './Store/store';
-import { RootState } from './Store/store';
-import { fetchUserData } from './Store/action';
+import { SidebarProvider } from './context/SidebarProvider';
+import { Routes, Route } from 'react-router-dom';
+import { CustomSideBar } from './Components/CustomSideBar/CustomSIdeBar';
+import CustomNavBar from './Components/NavBar/CustomNavBar';
+import ManagePage from './Pages/ManagePage/ManagePage';
+import './App.css'
 
 export default function App() {
 
-  /*
-  const dispatch = useAppDispatch();
-  const { data, error } = useSelector((state: RootState) => state.yourData);
-
-  if (error) {
-    return <div className="error">Error: {error}</div>;
-    console.log(data);
-  }
-  const { allData } = useSelector((state: RootState) => ({
-    allData: state.allData.data,
-  }));
-
-  useEffect(() => {
-    dispatch(fetchUserData());
-  }, [dispatch]);
-  */
-
   return (
-    <div>App</div>
+    <SidebarProvider>
+    <div>
+      <CustomSideBar/>
+      <div className="container">
+      <CustomNavBar/>
+      <Routes>
+      <Route path="/manage/*" element={<ManagePage />} />
+      </Routes>
+      </div>
+    </div>
+    </SidebarProvider>
   )
 }

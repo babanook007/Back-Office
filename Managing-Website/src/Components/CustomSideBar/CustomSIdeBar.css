@@ -1,0 +1,409 @@
+@import '../../index.css';
+
+.sidebar header {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-color-light);
+    position: relative;
+    height: 90vh;
+}
+
+.image {
+    display: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sidebar.close .image {
+    top: 15px;
+    left: 0px;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    background: white; 
+    min-width: 60px;
+    display: flex;
+    height: 55px;
+    align-items: center;
+    animation: fade-left 0.5s;
+}
+
+.sidebar::-webkit-scrollbar{
+    display: none;
+}
+
+.sidebar {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    background: var(--sidebar-color); /* ใช้ CSS variable เพื่อกำหนดสีในโหมด Light Mode */
+    transition: var(--tran-02);
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.sidebar.close{
+    width:  88px;
+}
+
+.sidebar.close .nav-text{
+    opacity: 0;
+}
+.sidebar.close .mode-text{
+    opacity: 0;
+}
+.sidebar.close .header-text{
+    opacity: 0;
+}
+
+.sidebar.close header .menu-bar .bottom-conten .mode .moon-sun .moon-icon,
+.sidebar.close header .menu-bar .bottom-conten .mode .moon-sun .sun-icon{
+    opacity: 0;
+}
+
+.content-size-fixing{
+    min-height: 40px;
+}
+
+.nav-link1{
+    flex-direction: column;
+    transition: var(--tran-05);
+    
+}
+
+.nav-link1.drop{
+    height: fit-content;
+    border-radius: 15px;
+}
+
+.icon-content {
+    min-width: 60px;
+
+}
+
+.nav-link1:hover .drop-menu{
+    background: var(--primary-color);
+    color: var(--text-color-light);
+}
+
+.nav-link1.drop .drop-menu{
+    height: 40px;
+    transition: var(--tran-05);
+    background: var(--primary-color);
+    color: var(--text-color-light);
+    border-radius: 15px;
+}
+
+.nav-link2{
+    flex-direction: column;
+    transition: var(--tran-05);
+}
+
+.nav-link2.drop{
+    height: fit-content;
+    border-radius: 15px;
+}
+
+.nav-link2:hover .drop-menu{
+    background: var(--primary-color);
+    color: var(--text-color-light);
+}
+
+.icon-content {
+    min-width: 60px;
+}
+
+.nav-link2.drop a{
+    height: 40px;
+    transition: var(--tran-05);
+    background: var(--primary-color);
+    border-radius: 15px;
+}
+
+.nav-link3{
+    flex-direction: column;
+    transition: var(--tran-05);
+}
+
+.nav-link3:hover .drop-menu{
+    background: var(--primary-color);
+    color: var(--text-color-light);
+}
+
+.nav-link3.drop{
+    height: fit-content;
+    border-radius: 15px;
+}
+
+.icon-content {
+    min-width: 60px;
+}
+
+.nav-link3.drop a{
+    height: 40px;
+    transition: var(--tran-05);
+    background: var(--primary-color);
+    border-radius: 15px;
+}
+
+.drop-down-icon {
+    margin-right: 10px;
+    position: absolute;
+    color: var(--text-color-light);
+    right: 0px;
+}
+
+.drop-down-container {
+    width: 100%;
+    animation: fade-down 0.1s;
+}
+
+.drop-down-content{
+    margin-left: 35px;
+    width: 100%;
+    height: 40px;
+    color: var(--text-color-light);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 200;
+}
+
+.nav-text-conten {
+    width: fit-content;
+}
+
+.sidebar.close .drop-down-icon{
+    opacity: 0;
+}
+
+
+.icon {
+    min-width: 60px;
+}
+
+.nav-text {
+    margin-left: -10px;
+}
+
+.icon,
+.nav-text {
+    color: var(--text-color-light);
+    transition: var(--tran-02);
+}
+
+.sidebar li {
+    height: 40px;
+    margin-top: 10px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.image img {
+    width: 50px;
+    border-radius: 6px;
+}
+
+.image-text {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column;
+    transition: var(--tran-02);
+}
+
+.name {
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    font-weight: 600;
+    transition: var(--tran-02);
+    font-size: 28px;
+}
+
+.profession {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    margin-top: 5px;
+    transition: var(--tran-02);
+    font-size: 16px;
+}
+
+.sidebar.close .name{
+    display: none;
+}
+
+.sidebar.close .profession{
+    display: none;
+}
+
+.toggle {
+    position: absolute;
+    top: 30px;
+    right: -13px;
+    transform: translateY(-50%);
+    height: 28px;
+    width: 28px;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: var(--tran-05);
+    cursor: pointer;
+}
+
+.toggle.rotate {
+    position: absolute;
+    top: 15px;
+    right: -13px;
+    transform: translateY(-50%);
+    height: 28px;
+    width: 28px;
+    background: var(--primary-color);
+    color: var(--toggle-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transform: rotate(180deg);
+}
+
+.sidebar li a {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: var(--tran-04);
+}
+
+.sidebar.close .menu-bar{
+    margin-top: 90px;
+}
+
+.sidebar .menu-bar {
+    margin-top: 15px;
+    height: calc(100% - 50px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-bar .mode {
+    position: relative;
+    background: var(--primary-color-light);
+    transition: var(--tran-05);
+}
+
+.moon-sun {
+    height: 40px;
+    width: 60px;
+    padding-left: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.moon-icon {
+    position: absolute;
+    opacity: 0;
+}
+
+.sun-icon {
+    position: absolute;
+}
+.moon-sun.dark-mode {
+    height: 40px;
+    width: 60px;
+    padding-left: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.moon-sun.dark-mode .moon-icon{
+    opacity: 1;
+}
+
+.moon-sun.dark-mode .sun-icon{
+    opacity: 0;
+}
+
+.toggle-switch{
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:100% ;
+    min-width: 60px;
+}
+
+.switch{
+    position: relative;
+    height: 22px;
+    width: 44px;
+    border-radius: 25px;
+    background: var(--toggle-color);
+}
+
+.switch::before{
+    content: '';
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    background: var(--sidebar-color);
+    cursor: pointer;
+    transition: var(--tran-03);
+}
+
+.switch-on{
+    position: relative;
+    height: 22px;
+    width: 44px;
+    border-radius: 25px;
+    background: var(--primary-color);
+}
+
+.switch-on::before{
+    content: '';
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    top: 50%;
+    left: 25px;
+    transform: translateY(-50%);
+    background: var(--sidebar-color);
+    cursor: pointer;
+    transition: var(--tran-03);
+}
+
+.Link {
+    color: var(--text-color-light);
+}
+  
+@media screen and (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+}

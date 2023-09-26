@@ -1,12 +1,17 @@
+// store.ts
 import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from './reducers';
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux';
+import authReducer from './authReducer';
 
-export const store = configureStore({
-    reducer: rootReducer, // ใช้ rootReducer เพื่อรวม reducers
-    devTools: process.env.NODE_ENV === "development",
-  });
+const store = configureStore({
+  reducer: {
+    auth: authReducer,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+});
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
+
+export default store;

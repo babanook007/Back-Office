@@ -1,0 +1,21 @@
+@import '../../index.css';
+
+.Nav-Container {
+    z-index: 999;
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--primary-color);
+    width: 100%;
+    height: fit-content;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.hamburger {
+    color: white;
+    cursor: pointer;
+}

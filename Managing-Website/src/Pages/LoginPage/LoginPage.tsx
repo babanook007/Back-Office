@@ -3,13 +3,15 @@ import { useNavigate } from "react-router-dom";
 import style from "./Login.module.css";
 import axios from "axios";
 import { loginApi, regisApi } from "../../api/connection";
+import { useAppDispatch } from "../../store/store";
+import { setToken } from "../../store/authReducer";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const [regismodal, setregismodal] = useState(true);
+  const [regismodal, setregismodal] = useState(false);
   const [regisError, setReisError] = useState("");
   const [regisusername, setReisUsername] = useState("");
   const [regispassword, setRegisPassword] = useState("");
@@ -35,6 +37,7 @@ export default function LoginPage() {
     setregismodal(false);
   };
 
+  const dispatch = useAppDispatch();
   const handleLogin = async () => {
     try {
       const data = {
@@ -44,12 +47,16 @@ export default function LoginPage() {
       const response = await axios.post(`${loginApi}`, data);
       if (response.status === 200) {
         console.log("เข้าสู่ระบบสำเร็จ");
-        navigate("/main");
+
+        const token = response.data.token;
+        dispatch(setToken(token));
+
+        navigate("/main/manage/all");
       } else if (response.status === 400) {
         setError("Username หรือ Password ผิดพลาด กรุณาลองใหม่อีกครั้ง");
       }
     } catch (error) {
-      setError("เกิดข้อผิดพลาดในระหว่างการล็อคอิน");
+      setError("เกิดข้อผิดพลาดในระหว่างการล็อกอิน");
     }
   };
 
@@ -86,7 +93,7 @@ export default function LoginPage() {
         console.log(response);
       }
     } catch (error) {
-        setReisError("Username หรือ Email ถูกใช้งานไปแล้ว");
+      setReisError("Username หรือ Email ถูกใช้งานไปแล้ว");
     }
   };
 

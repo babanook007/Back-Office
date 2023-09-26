@@ -12,7 +12,7 @@ const mongoURL =
   "mongodb+srv://StephenP:Stephen11@cluster0.qpaeqzw.mongodb.net/IotData";
 
 app.use(express.json());
-app.use("/login", cors());
+app.use(cors());
 
 mongoose
   .connect(mongoURL)
@@ -114,7 +114,7 @@ const equipmentSchema = new mongoose.Schema({
 
 const EquipmentModel = mongoose.model("equipment", equipmentSchema);
 
-app.post("/insertequipment" , async(req,res) => {
+app.post("/insertequipment" ,verifyToken, async(req,res) => {
   try {
     const { eq_name, eq_direction, eq_status } = req.body;
     const newEquipment = new EquipmentModel ({
@@ -129,3 +129,54 @@ app.post("/insertequipment" , async(req,res) => {
     return res.status(500).json({ message: "Error Insert Equipments" });
   }
 })
+
+app.get("/getEquipment",verifyToken, (req, res) => {
+  EquipmentModel.find()
+    .then(function (users) {
+      res.json(users);
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+});
+
+app.put('/updateEquipment/:id', verifyToken, (req, res) => {
+  const equipmentId = req.params.id;
+  const updatedEquipmentData = req.body;
+
+  EquipmentModel.findByIdAndUpdate(
+    equipmentId,
+    updatedEquipmentData,
+    { new: true }
+  )
+    .then((updatedEquipment) => {
+      if (!updatedEquipment) {
+        return res
+          .status(404)
+          .json({ error: 'equipment not found' });
+      }
+      res.json(updatedEquipment);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: 'something went wrong. please try again later!' });
+    });
+});
+
+app.delete('/deleteEquipment/:id', verifyToken, (req, res) => {
+  const equipmentId = req.params.id;
+  EquipmentModel.findByIdAndRemove(equipmentId)
+    .then((deletedEquipment) => {
+      if (!deletedEquipment) {
+        return res
+          .status(404)
+          .json({ error: 'Equipment not found' });
+      }
+      res.json({ message: 'Equipment deleted successfully' });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: 'Something went wrong. Please try again later!' });
+    });
+});
+
